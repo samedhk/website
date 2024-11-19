@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signals and Systems</title>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<a href='../home.html'>Home</a>
+<h1 style='text-align: center'>Signals and Systems</h1>
+<h2>Signals</h2>
+<p>A signal, as understood in the English language, is a sign or indication used to convey something. This concept also applies in the engineering world, where a signal carries some form of data. The output of a random variable could also be defined as a signal. However, my attempt to form a more specific definition is as follows: A signal is a physical quantity that varies with respect to a fundamental quantity (such as time or space) and carries some data along with it.</p>
+<h3>The Fundamentals</h3>
+<p>Signals can be continuous or discrete. A signal can also be multidimensional. For example, sound captured by the human ear can be considered a continuous one-dimensional signal with respect to time, while vision captured by a frame can be a continuous two-dimensional signal with respect to space. However, if the image is captured by an array of sensors, it becomes a discrete two-dimensional signal.</p>
+<p>A signal could be mathematically described by a function. For example \(x(t)\) and \(x[n]\) are continuous and discrete signals with respect to variables \(t\) and \(n\) respectively.</p>
+<h3>Classifications</h3>
+<p>There are several ways to classify signals, one of which is the distinction between continuous and discrete signals, discussed in the previous section. However, some other ways of classifying signals are listed below.
+<ol>
+<li>Periodic and Aperiodic Signals</li>
+<li>Deterministic and Nondeterministic Signals</li>
+<li>Causal, Non-causal and Anti-causal Signals</li>
+<li>Even and Odd Signals</li>
+</ol>
+</p>
+<h3>Standard Signals</h3>
+<div style='text-align: center'>
+<img src='standardfunctions.png' size=100%>
+</div>
+<h2>Systems</h2>
+<p>Now that the basic idea of signals is understood, we need to know how to perform operations on them to make use of these signals. A system is a function that takes in a signal and produces another signal, which has the same number of dimensions and nature as the input signal.</p>
+<h3>Properties</h3>
+<p>Just like signals, systems can also be classified based on their properties. However, this classification is more critical here, as a deeper understanding of some of these types of systems is required for the further discussion. These properties are listed below.</p>
+<ol>
+<li>Memorylessness</li>
+<li>Linearity</li>
+<li>Time Invariance</li>
+<li>Causality</li>
+<li>Stability</li>
+</ol>
+<p>Systems which are linear and time invariant can be scaled, superposed and transposed with respect to time. These properties provide the flexibility and convenience of operating on the corresponding systems giving them a special status. Such systems are called Linear Time Invariant (LTI) Systems.</p>
+<h2>Impulse Response</h2>
+<p>Defining systems in terms of signals which are already variables can become difficult. This is where the idea of impulse response comes into picture. Impulse response is the response or output of a system when the input given is an impulse signal. Impulse response is particuarly important because any input signal can be modelled as a summation or integration of impulse signals. Further, LTI systems are special because the output could be found by a similar combination of impulse responses of these signals.</p>
+<h3>FIR and IIR</h3>
+<p>If the impulse response of a system could be taking non-zero values for a finite interval, such impulse response is called Finite Impulse Response. On the other hand, if the impulse response of a system is non-zero for an infinite interval (eg. step function), then it known as Infinite Impulse Response.</p>
+<h2>Convolution</h2>
+<p>Now let's say we have two signals, \(h(t)\), which is the impulse response to a system, and \(x(t)\), which is the input given to the same system. In order to find the resultant output, we need to model \(x(t)\) as a linear combination of impulse signals, and find the corresponding combination of \(h(t)\)s, as expressed in figure below.
+<div style='text-align: center;'>
+<img src='convolution.png'>
+</div>
+A mathematically convenient way of doing this could be by expressing \(x(t)\) as
+\[ x(t)=\int_{\tau=-\infty}^{\infty}x(\tau)\delta(t-\tau) \]
+We also assume the impulse response of the system is known to us as<br />
+\[ h(t)=T\left\{\delta(t)\right\} \]
+Now, if \(x(t)\) is an LTI system, we can take advantage of the LTI properties and calculate the final expression for convolution as
+\[ \begin{split}
+y(t)=&T\left\{\int_{\tau=-\infty}^{\infty}x(\tau)\delta(t-\tau)\right\}\\
+y(t)=&\int_{\tau=-\infty}^{\infty}x(\tau)T\left\{\delta(t-\tau)\right\}\\
+y(t)=&\int_{\tau=-\infty}^{\infty}x(\tau)h(t-\tau)\\
+\end{split} \]
+The mathematical notation for convolution is
+\[ y(t)=x(t)*h(t) \]
+Further, in both these domains convolution has properties of being commutative, associative and distributive, which is quite intuitive from concept of convolution.
+\[ \begin{split}
+x_1(t)*x_2(t)&=x_2(t)*x_1(t)\\
+x_1(t)*[x_2(t)*x_3(t)]&=[x_1(t)*x_2(t)]*x_3(t)\\
+x_1(t)*[x_2(t)+x_3(t)]&=x_1(t)*x_2(t)+x_1(t)*x_3(t)\\
+\end{split} \]</p>
+<h2>Correlation</h2>
+<p>Another operation performed on signals is correlation. Correlation is performed to find the similarity of two signals with respect to a time delay in these signals. Equality of signals doesn't make sense, which makes correlation an important way of comparing signals. The two types of correlations are cross-correlation and auto-correlation. Cross-correlation is done for two distinct signals, while auto-correlation is done for a single signal. The cross-correlation of two signals \(x_1(t)\) and \(x_2(t)\) is
+\[ x_1(t)\cdot x_2(t)=\int_{-\infty}^\infty x_1(\tau)x_2(\tau+t)d\tau \]
+If \(x_1(t)=x_2(t)=x(t)\), then it is called auto-correlation. Cross correlation is not commutative or associative but it is distributive. This can be verified by basic arithmetic and linear algebra.</p>
+<h2>Energy and Power</h2>
+<p>The energy and power of a signal have their usual meanings here are defined in the conventional way itself, as
+\[ E=\int_{-\infty}^\infty\left|x(t)\right|^2dt \]
+\[ P=\lim_{T\to\infty}\frac{1}{T}\int_{-T}^T\left|x(t)\right|^2dt \]
+Signals can also be classified on the basis of energy and power into energy signals and power signals. Energy signals have \(0\lt E \lt \infty\) and \(P=0\), while power signals have \(E=\infty\) and \(0 \lt P \lt \infty\).</p>
+<p>All the concepts discussed so far are consistent in continuous as well as discrete domains. However, from the next section, continuous and discrete signals need to be handled separately.</p>
+</body>
+</html>
